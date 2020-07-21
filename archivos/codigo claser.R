@@ -27,6 +27,12 @@ timelines <- get_timelines(c("alferdez", "horaciorlarreta", "kicillofok"), n = 3
 
 write_as_csv(timelines, "timelines.csv")
 
+
+### Si no pudiste descargarlo porque no funcionó rtweet, recomendamos estas lineas de codigo:
+# timelines   <- read.csv("https://github.com/labpoliticasuba/Taller-de-Twitter/raw/master/archivos/timelines.csv", fileEncoding = "UTF-8")
+#usuario  <- read.csv("https://raw.githubusercontent.com/labpoliticasuba/Taller-de-Twitter/master/archivos/usuario.csv", fileEncoding = "UTF-8")
+#trendsAR <- read.csv("https://raw.githubusercontent.com/labpoliticasuba/Taller-de-Twitter/master/archivos/trendsAR.csv", fileEncoding = "UTF-8")
+
 ## Graficamos una línea de tiempo con los tuits de las tres cuentas
 
 timelines %>%
