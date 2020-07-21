@@ -68,7 +68,7 @@ View(top_user_timelines)
 
 #Hacemos una matriz de palabras (palabras que aparecen juntas en el mismo texto/tweet)
 user_timelines_fcm <- fcm(user_timelines)
-head(user_fcm)
+head(user_timelines_fcm) 
 
 #Visualizamos las relaciones
 user_fcm <- fcm_select(user_timelines_fcm, pattern = top_user_timelines)
