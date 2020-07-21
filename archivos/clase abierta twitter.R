@@ -1,8 +1,10 @@
 install.packages("rtweet")
 install.packages("tidyverse")
+install.packages("quanteda")
 
 library(rtweet)
 library(tidyverse)
+library(quanteda)
 
 ## Comprobamos que funcione rtweet pidiéndole a la API las tendencias de AR
 trendsAR <- get_trends("argentina")
@@ -37,4 +39,33 @@ timelines %>%
   )
 
 
+######## ANÁLISIS DEL TEXTO ######## 
 
+#Vemos como quedó el dataset que descargamos recientemente
+View(timelines)
+#Vamos a transformar ese dataset en un corpus que podamos trabajar
+corpus_timelines <- corpus(timelines)
+head(corpus_timelines)
+#Ahora vamos a transformalo en una matriz de palabras y tweets
+dfm_timelines <- dfm(corpus_timelines, remove_punct = TRUE, remove = stopwords("spa"), 
+                     groups = "screen_name")
+head(dfm_timelines)
+#Nube de palabras
+textplot_wordcloud(dfm_timelines, rotation = 0.25,
+                   color = rev(RColorBrewer::brewer.pal(10, "RdBu")))
+#Nube de palabras comparación
+textplot_wordcloud(dfm_timelines, comparison = TRUE, max_words = 300,
+                   color = c("blue", "red", "green"))
+#Top Users
+user_timelines <- dfm_select(dfm_timelines, pattern = "@*")
+top_user_timelines <- names(topfeatures(user_timelines, 50))
+View(top_user_timelines)
+#Hacemos una matriz de palabras (palabras que aparecen juntas en el mismo texto/tweet)
+user_timelines_fcm <- fcm(user_timelines)
+head(user_fcm)
+#Visualizamos las relaciones
+user_fcm <- fcm_select(user_timelines_fcm, pattern = top_user_timelines)
+textplot_network(user_fcm, min_freq = 0.1, edge_color = "orange", edge_alpha = 0.8, edge_size = 5)
+#Top hashtags
+user_fcm <- fcm_select(user_fcm, pattern = topuser)
+textplot_network(user_fcm, min_freq = 0.1, edge_color = "orange", edge_alpha = 0.8, edge_size = 5)
