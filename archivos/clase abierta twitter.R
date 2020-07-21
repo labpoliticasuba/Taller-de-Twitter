@@ -1,7 +1,8 @@
 install.packages("rtweet")
+install.packages("tidyverse")
+
 library(rtweet)
-library(lubridate)
-library(dplyr)
+library(tidyverse)
 
 ## Comprobamos que funcione rtweet pidiéndole a la API las tendencias de AR
 trendsAR <- get_trends("argentina")
