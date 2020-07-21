@@ -73,7 +73,3 @@ head(user_timelines_fcm)
 #Visualizamos las relaciones
 user_fcm <- fcm_select(user_timelines_fcm, pattern = top_user_timelines)
 textplot_network(user_fcm, min_freq = 0.1, edge_color = "orange", edge_alpha = 0.8, edge_size = 5)
-
-#Top hashtags
-user_fcm <- fcm_select(user_fcm, pattern = topuser)
-textplot_network(user_fcm, min_freq = 0.1, edge_color = "orange", edge_alpha = 0.8, edge_size = 5)
