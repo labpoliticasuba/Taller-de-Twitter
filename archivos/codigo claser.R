@@ -49,6 +49,9 @@ timelines %>%
 
 #Vemos como quedó el dataset que descargamos recientemente
 View(timelines)
+
+timelines <- timelines %>%
+  rename(texto = text)
 #Vamos a transformar ese dataset en un corpus que podamos trabajar
 corpus_timelines <- corpus(timelines)
 
